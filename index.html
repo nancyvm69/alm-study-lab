@@ -17,6 +17,7 @@
   <label class="search"><span class="sr">Search the site</span><input id="site-search" type="search" placeholder="Search  ( / )" autocomplete="off"></label>
   <nav class="nav" aria-label="Main">
     <a href="#/">Start here</a>
+    <a href="#/basics">Start from zero</a>
     <a href="#/learn">Lessons</a>
     <a href="#/guides">Guides</a>
     <a href="#/templates">Answer templates</a>
@@ -39,6 +40,7 @@
 <script src="assets/labs.js"></script>
 <script src="assets/app.js"></script>
 <script src="assets/sections.js"></script>
+<script src="assets/basics.js"></script>
 <script>
 (function(){const r=document.documentElement;let t="auto";try{t=localStorage.getItem("alm-theme")||"auto"}catch(e){}
 const apply=v=>{if(v==="auto")delete r.dataset.theme;else r.dataset.theme=v;document.querySelectorAll(".theme [data-t]").forEach(b=>{b.classList.toggle("on",b.dataset.t===v);b.setAttribute("aria-pressed",b.dataset.t===v)});};

@@ -136,7 +136,7 @@ route(/^\/learn$/, () => {
 route(/^\/learn\/([\w-]+)$/, (id) => {
   const i = LESSONS.findIndex(l => l.id === id); const l = LESSONS[i]; if (!l) { location.hash = "#/"; return; }
   const nx = LESSONS[i + 1], pv = LESSONS[i - 1];
-  view().innerHTML = `<nav class="crumb"><a href="#/learn">Lessons</a> / ${l.title}</nav><article class="lesson" style="--lc:${l.color}"><h1>${l.title}</h1><p class="hook">${l.hook}</p>${l.body}
+  view().innerHTML = `<nav class="crumb"><a href="#/learn">Lessons</a> / ${l.title}</nav><article class="lesson" style="--lc:${l.color}"><h1>${l.title}</h1><p class="hook">${l.hook}</p>${typeof PLAIN !== "undefined" && PLAIN[l.id] ? `<div class="plainbox"><b>In plain words:</b> ${PLAIN[l.id][0]}<span>New to this? Do these short beginner steps first: ${PLAIN[l.id][1].map(z => { const b = BASICS.find(x => x.id === z); return `<a href="#/basics/${z}">${b.title}</a>`; }).join(" · ")}</span></div>` : ""}${l.body}
   <section class="check"><h2>Check yourself</h2><p class="small">From your actual exams. Answer before scrolling back up.</p><div class="qs"></div>
   <div class="explain-back"><h3>Explain it back</h3><p>${l.explainBack}</p><textarea rows="4" data-eb placeholder="Write it as if teaching someone. Gaps show up fast.">${esc(S.notes["eb-" + l.id] || "")}</textarea></div></section>
   <nav class="pager">${pv ? `<a href="#/learn/${pv.id}">Previous: ${pv.title}</a>` : "<span></span>"}${nx ? `<a href="#/learn/${nx.id}">Next: ${nx.title}</a>` : `<a href="#/exams">On to the exams</a>`}</nav></article>`;

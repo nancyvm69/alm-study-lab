@@ -37,7 +37,7 @@ const COURSE = [
 /* ---------- study paths ---------- */
 const PATHS = {
   learn: { name: "Learning it the first time", sub: "One topic per sitting, in course order. Repeat this loop for each topic.", steps: [
-    ["Read 'ALM in plain language' below", "#/"], ["Do the lesson for this week's topic, playing with its figure", "#/learn"], ["Answer the lesson's check questions before rereading", "#/learn"],
+    ["Do the 'Start from zero' steps, a few per day (about 3 minutes each)", "#/basics"], ["Read 'ALM in plain language' below", "#/"], ["Do the lesson for this week's topic, playing with its figure", "#/learn"], ["Answer the lesson's check questions before rereading", "#/learn"],
     ["Follow the matching step-by-step guide", "#/guides"], ["Practice saying that topic's answer templates in recall mode", "#/templates"], ["Do the matching practice set in study mode", "#/exams"],
     ["Review due flashcards (5 minutes, daily)", "#/cards"], ["Look up any unfamiliar word in Definitions", "#/define"]] },
   week: { name: "Exam in a week", sub: "One block per day. Mixing topics is part of the plan.", steps: [
@@ -61,7 +61,7 @@ function renderHome() {
   <section class="hero">
     <div class="hero-text"><h1>Applied Linear Modeling, one line at a time</h1>
     <p class="lede">Plain-language lessons, step-by-step guides, ready-made answer sentences, and every practice exam with worked solutions.</p>
-    <div class="row"><a class="btn big" href="#/" data-jump="alm">Start here</a><a class="btn ghost big" href="#/" data-jump="path">Pick a study path</a></div></div>
+    <div class="row"><a class="btn big" href="#/basics">New to statistics? Start from zero</a><a class="btn ghost big" href="#/" data-jump="alm">ALM in plain language</a></div></div>
     <div class="hero-viz" aria-hidden="true"><svg id="hero-svg" viewBox="0 0 420 300"></svg><div class="hero-eq" id="hero-eq">Ŷ = b₀ + b₁X</div></div>
   </section>
 
@@ -241,6 +241,7 @@ function buildIndex() {
   TEMPLATES.forEach(t => I.push({ type: "Template", title: t.name, text: t.cue + " " + t.t + " " + t.ex, href: "#/templates/" + t.g }));
   LESSONS.forEach(l => I.push({ type: "Lesson", title: l.title, text: l.hook + " " + strip(l.body), href: "#/learn/" + l.id }));
   Object.values(ALLQ).forEach(q => { const ex = EXAMS.find(e => e.id === q.exam); I.push({ type: "Question", title: `${ex.title}, Q${q.num}`, text: strip(q.prompt) + " " + strip(q.model || "") + " " + strip(q.explain || ""), href: `#/exam/${q.exam}/study`, qid: q.id }); });
+  if (typeof BASICS !== "undefined") BASICS.forEach(b => I.push({ type: "Beginner step", title: b.title, text: b.idea + " " + strip(b.story) + " " + b.words.map(w => w.join(" ")).join(" "), href: "#/basics/" + b.id }));
   CARDS.forEach(c => I.push({ type: "Flashcard", title: c[0], text: c[1], href: "#/cards/key" }));
   return I;
 }
@@ -251,7 +252,7 @@ route(/^\/search\/?(.*)$/, (raw) => {
   view().innerHTML = `<h1>Search</h1>`;
   if (!words.length) { view().insertAdjacentHTML("beforeend", `<p class="lede">Type in the search box to look across definitions, guides, templates, lessons, flashcards and every exam question.</p>`); return; }
   const scored = SEARCH_IDX.map(it => { const t = norm(it.title), x = norm(it.text); let s = 0; for (const w of words) { if (t.includes(w)) s += 5; else if (x.includes(w)) s += 1; else return null; } if (t === norm(q)) s += 10; return { ...it, s }; }).filter(Boolean).sort((a, b) => b.s - a.s);
-  const order = ["Definition", "Guide", "Template", "Lesson", "Flashcard", "Question"];
+  const order = ["Beginner step", "Definition", "Guide", "Template", "Lesson", "Flashcard", "Question"];
   const hl = s => { let o = esc(s); words.forEach(w => { o = o.replace(new RegExp("(" + w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + ")", "ig"), "<mark>$1</mark>"); }); return o; };
   const snip = (text) => { const n = norm(text); const i = n.indexOf(words[0]); const st = Math.max(0, i - 60); return (st ? "…" : "") + text.slice(st, st + 180) + "…"; };
   view().insertAdjacentHTML("beforeend", `<p class="lede">${scored.length} result${scored.length === 1 ? "" : "s"} for "${esc(q)}"</p>` + (scored.length ? order.map(type => { const r = scored.filter(x => x.type === type); if (!r.length) return ""; return `<h2>${type}s <span class="small">${r.length}</span></h2><ul class="results">${r.slice(0, 12).map(x => `<li><a href="${x.href}"${x.qid ? ` data-q="${x.qid}"` : ""}>${hl(x.title)}</a><p>${hl(snip(x.text.replace(/<[^>]+>/g, "")))}</p></li>`).join("")}</ul>`; }).join("") : `<p>Nothing matched. Try a single key word, like "residual", "odds" or "dummy".</p>`));

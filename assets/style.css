@@ -347,3 +347,40 @@ mark { background: var(--amber-soft); color: var(--ink); padding: 0 2px; border-
 .seg { flex-wrap: wrap; max-width: 100%; }
 .gsteps li, .gsteps, .tpl, .q-card, .widget, .panel, .callout { min-width: 0; }
 .gsteps li .code, .tpl .ttext { max-width: 100%; }
+
+/* ---------- Start from zero ---------- */
+.zlist { list-style: none; padding: 0; display: grid; gap: 8px; }
+.zlist a { display: grid; grid-template-columns: 44px 1fr; gap: 12px; align-items: center; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r-md); padding: 12px 16px; color: var(--ink); text-decoration: none; }
+.zlist a:hover { border-color: var(--teal); }
+.zlist a > span:last-child { display: flex; flex-direction: column; gap: 2px; } .zlist a > span:last-child > span { color: var(--muted); font-size: .94rem; }
+.zn { font: 800 1.3rem/1 var(--display); width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center; background: var(--paper); color: var(--teal); border: 2px solid var(--teal); }
+.zlist li.done .zn { background: var(--teal); color: var(--card); }
+.zbar { display: flex; gap: 4px; margin: 6px 0 18px; } .zbar a { flex: 1; height: 8px; border-radius: 4px; background: var(--grid); }
+.zbar a.done { background: var(--teal); } .zbar a.on { background: var(--line); }
+.bigidea { font: 500 1.3rem/1.45 var(--display); background: var(--teal-soft); border-radius: var(--r-md); padding: 14px 18px; margin: 0 0 18px; max-width: none; }
+.bigidea span { display: block; font: 700 .85rem var(--body); color: var(--teal); margin-bottom: 2px; }
+.zgrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 24px; align-items: start; }
+.zstory { font-size: 1.08rem; line-height: 1.7; } .zstory p, .zstory li { max-width: 60ch; }
+.zfig { margin: 0; background: var(--card); border: 1px solid var(--rule); border-radius: var(--r-md); padding: 12px; position: sticky; top: 12px; }
+.rule { background: var(--amber-soft); border-left: 4px solid var(--amber); padding: 8px 12px; border-radius: 4px; }
+.cap { font-size: .88rem; color: var(--muted); margin: 4px 0 0; text-align: center; }
+.icons-row { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 10px; }
+.ic { background: var(--i); color: var(--card); font-weight: 700; padding: 6px 12px; border-radius: 20px; font-size: .9rem; }
+.three-charts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; } .two-charts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.chart .ring { fill: none; stroke: var(--line); stroke-width: 2.5; }
+.chart .t0txt { fill: var(--teal); } .chart .t1txt { fill: var(--line); }
+.chart .step { fill: none; stroke: var(--line); stroke-width: 2.5; stroke-dasharray: 5 4; }
+.chart .resid.thick { stroke-width: 2.5; opacity: .75; }
+.chart .bar { fill: var(--c1); } .chart .bar.alt { fill: var(--teal); } .chart .bar.hotbar { fill: var(--line); }
+.chart .dot.sun { fill: var(--c5); } .chart .meanbar { stroke: var(--ink); stroke-width: 4; stroke-linecap: round; }
+.chart .pyes { fill: var(--teal); } .chart .pno { fill: var(--grid); stroke: var(--muted); stroke-width: 1.5; }
+.chart .orbox { fill: var(--amber-soft); stroke: var(--amber); } .chart .lbl.big { font-size: 17px; }
+.pick-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+.pk { background: var(--card); border: 1px solid var(--rule); border-top: 4px solid var(--teal); border-radius: var(--r-sm); padding: 10px 12px; display: flex; flex-direction: column; gap: 4px; font-size: .95rem; }
+.zwords, .zcheck { background: var(--card); border: 1px solid var(--rule); border-radius: var(--r-md); padding: 4px 18px 16px; margin-top: 18px; }
+.zwords h2, .zcheck h2 { font-size: 1.2rem; margin-top: .8em; }
+.xlate td:last-child { color: var(--ink); } .xlate td:first-child { color: var(--muted); }
+.zcheck .fb .btn { margin-top: 6px; }
+.plainbox { background: var(--teal-soft); border-left: 5px solid var(--teal); border-radius: var(--r-sm); padding: 12px 16px; margin: 6px 0 18px; font-size: 1.05rem; }
+.plainbox span { display: block; margin-top: 6px; font-size: .92rem; }
+@media (max-width: 900px) { .zgrid { grid-template-columns: minmax(0, 1fr); } .zfig { position: static; } .three-charts { grid-template-columns: 1fr; } .two-charts, .pick-grid { grid-template-columns: 1fr; } }

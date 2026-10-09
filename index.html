@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ALM Study Lab</title>
+<meta name="description" content="Interactive study platform for Applied Linear Modeling: lessons, labs, practice exams with step-by-step answers, and spaced-repetition flashcards.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2313233A'/%3E%3Cline x1='5' y1='25' x2='27' y2='8' stroke='%23FF5C93' stroke-width='3' stroke-linecap='round'/%3E%3Ccircle cx='10' cy='17' r='2.5' fill='%23fff'/%3E%3Ccircle cx='21' cy='18' r='2.5' fill='%23fff'/%3E%3Ccircle cx='16' cy='12' r='2.5' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip" href="#view">Skip to content</a>
+<aside class="side">
+  <a class="brand" href="#/"><svg viewBox="0 0 32 32" width="30" height="30" aria-hidden="true"><rect width="32" height="32" rx="7" class="b-bg"/><line x1="5" y1="25" x2="27" y2="8" class="b-line"/><circle cx="10" cy="17" r="2.5" class="b-dot"/><circle cx="21" cy="18" r="2.5" class="b-dot"/><circle cx="16" cy="12" r="2.5" class="b-dot"/></svg><span>ALM Study Lab</span></a>
+  <label class="search"><span class="sr">Search the site</span><input id="site-search" type="search" placeholder="Search  ( / )" autocomplete="off"></label>
+  <nav class="nav" aria-label="Main">
+    <a href="#/">Start here</a>
+    <a href="#/learn">Lessons</a>
+    <a href="#/guides">Guides</a>
+    <a href="#/templates">Answer templates</a>
+    <a href="#/define">Definitions</a>
+    <a href="#/labs">Labs</a>
+    <a href="#/exams">Exams &amp; practice</a>
+    <a href="#/mix">Mixed quiz</a>
+    <a href="#/cards">Flashcards</a>
+    <a href="#/sheet">Cheat sheet</a>
+    <a href="#/how">How it works</a>
+  </nav>
+  <div class="theme" role="group" aria-label="Color theme"><button data-t="auto">Auto</button><button data-t="light">Light</button><button data-t="dark">Dark</button></div>
+</aside>
+<main id="view" tabindex="-1"></main>
+<script src="assets/exams.js"></script>
+<script src="assets/glossary.js"></script>
+<script src="assets/templates.js"></script>
+<script src="assets/guides.js"></script>
+<script src="assets/lessons.js"></script>
+<script src="assets/labs.js"></script>
+<script src="assets/app.js"></script>
+<script src="assets/sections.js"></script>
+<script>
+(function(){const r=document.documentElement;let t="auto";try{t=localStorage.getItem("alm-theme")||"auto"}catch(e){}
+const apply=v=>{if(v==="auto")delete r.dataset.theme;else r.dataset.theme=v;document.querySelectorAll(".theme [data-t]").forEach(b=>{b.classList.toggle("on",b.dataset.t===v);b.setAttribute("aria-pressed",b.dataset.t===v)});};
+apply(t);document.querySelectorAll(".theme [data-t]").forEach(b=>b.onclick=()=>{t=b.dataset.t;try{localStorage.setItem("alm-theme",t)}catch(e){}apply(t);});})();
+</script>
+</body>
+</html>
